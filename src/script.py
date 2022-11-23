@@ -1,31 +1,58 @@
 import states_parser as sp
 import karnaugh as kn
 
-parsed = [[['A', 'B', 'C', 'D'], ['O']],
-[[0, 0, 0, 0], [0]],
-[[0, 0, 0, 1], [0]],
-[[0, 0, 1, 0], [1]],
-[[0, 0, 1, 1], [1]],
-[[0, 1, 0, 0], [0]],
-[[0, 1, 0, 1], [1]],
-[[0, 1, 1, 0], [0]],
-[[0, 1, 1, 1], [1]],
-[[1, 0, 0, 0], [1]],
-[[1, 0, 0, 1], [0]],
-[[1, 0, 1, 0], [0]],
-[[1, 0, 1, 1], [0]],
-[[1, 1, 0, 0], [0]],
-[[1, 1, 0, 1], [1]],
-[[1, 1, 1, 0], [0]],
-[[1, 1, 1, 1], [1]]]
 
-parsed = [[['A', 'B', 'C', 'I1', 'I2'], ['O1', 'O2', 'O3']], [[1, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 1.0]], [[0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 1.0]]]
+print("Method 1: Solve Karnaugh equations based on finite state machine.\n")
 
-
-states = [[0, 1], [1, 2], [2, 0]]
+# Declare states with the format: [[state 0], [state 1], ...]
+# Each [state n] = [(next state when I0 = 0, I1 = 0, ... In = 0), (next state when I0 = 0, I1 = 0, ..., In = 1), ...]
 states = [[1, 1, 1, 3], [2, 2, 2, 2], [4, 4, 4, 4], [4, 4, 4, 4], [0, 0, 0, 0]]
 
+# Function to parse states into table format for Karnaugh mapper to process:
 parsed = sp.parse(states)
 
+# Print parsed states into human-readable table format:
+print("Parsed states:\n")
+sp.show(parsed)
+print("\n")
+
+# Function to map the Karnaugh:
 processed = kn.map(parsed)
+
+# Print mapped Karnaugh into HDL-compatible boolean equations:
+print("Output Equations:\n")
 kn.show(processed)
+print("\n\n\n\n")
+
+
+
+
+print("Method 2: Solve Karnaugh equations based on arbitrary truth table.")
+
+# Manually declare truth table:
+truth_table = [[['A', 'B', 'C', 'I1', 'I2'], ['O1', 'O2', 'O3']], 
+          [[1, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 1.0]], 
+          [[0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 1.0]]]
+
+# Print truth table in human-readable table format:
+print("Arbitrary Truth Table:\n")
+sp.show(truth_table)
+print("\n")
+
+# Populate truth table with default 0, 1, or 'X' for Karnaugh mapper.
+# kn.fill(input_truth_table, default_value)
+truth_table = kn.fill(truth_table, 0)
+
+# Print populated truth table in human-readable table format:
+print("Filled states:\n")
+sp.show(truth_table)
+print("\n")
+
+# Function to map the Karnaugh:
+processed = kn.map(truth_table)
+print ("")
+
+# Print mapped Karnaugh into HDL-compatible boolean equations:
+print("Output Equations:\n")
+kn.show(processed)
+print("\n\n")

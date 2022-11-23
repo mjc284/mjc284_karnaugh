@@ -43,10 +43,9 @@ def fill(table, default):
             index = 0
             for i in range(0, num_inputs):
                 index += line[0][i]*(2**(num_inputs - i - 1))
-            print(index)
             output[int(index)+1] = line
         swc = 1
-        
+
     return output
 
 
@@ -75,6 +74,19 @@ def map(table):
             if((line[1] == 1) or (line[1] == 'X')):
                 tmp += [line]
         selected_maps += [tmp]
+
+    old_selected_maps = []
+    old_outputs_label = []
+    cnt = 0
+    for map in selected_maps:
+        if(map != []):
+            old_selected_maps += [map]
+            old_outputs_label += [outputs_label[cnt]]
+        else:
+            num_outputs -= 1
+        cnt += 1
+    selected_maps = old_selected_maps
+    outputs_label = old_outputs_label
 
     old_selected_maps= []
     while(old_selected_maps != selected_maps):
@@ -106,9 +118,10 @@ def map(table):
                         tmp += [map[index1]]
             if(tmp != []):
                 processed += [tmp]
+            else:
+                processed = selected_maps
 
-        selected_maps = []
-        selected_maps += processed   
+        selected_maps = processed  
 
         post_selected_maps = []
 
@@ -124,14 +137,13 @@ def map(table):
                     post_map += [map[index1]]
             post_selected_maps += [post_map]
 
-        selected_maps = []
-        selected_maps += post_selected_maps 
+        selected_maps = post_selected_maps 
         
     mapped = []
     cnt = 0
     for map in selected_maps:
         tmp = []
-        tmp += [[table[0][0], table[0][1][cnt]]]
+        tmp += [[inputs_label, outputs_label[cnt]]]
         for line in map:
             if(line[1] != 'X'):
                 tmp += [line]
