@@ -60,3 +60,36 @@ def parse(states):
             output += [[input_bin, output_bin]]
 
     return output
+
+def present(parsed):
+    cnt1 = 0
+    for line in parsed:
+        cnt2 = 0
+        print("|", end = '')
+        for item in line:
+            for element in item:
+                if(isinstance(element, str)):
+                    if(len(element) > 1):
+                        print(" %s|" %element, end = '')
+                    else:
+                        print(" %s |" %element, end = '')
+                else:
+                    print(" %1d |" %element, end = '')
+
+            if(cnt2 == 0):
+                print("|", end = '')
+            cnt2 = 1
+
+        if(cnt1 == 0):
+            print("")
+            for i in range(0, 22):
+                print("-", end = '')
+        cnt1 = 1
+
+        print("")
+
+
+
+
+                
+
