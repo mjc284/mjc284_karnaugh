@@ -1,5 +1,6 @@
 import numpy as np
 
+# Check if two binary arrays differ by 1 bit
 def check_neighbor(cmp1, cmp2):
     num_inputs = len(cmp1)
     output = []
@@ -13,6 +14,7 @@ def check_neighbor(cmp1, cmp2):
             output += [cmp1[inputs]]
     return [[cnt], output]
 
+# Populate truth table with default values
 def fill(table, default):
     num_inputs = len(table[0][0])
     num_outputs = len(table[0][1])
@@ -22,12 +24,15 @@ def fill(table, default):
 
     tmp1 = []
     tmp2 = []
+
+    # Populate first address of empty row with 'default'
     for i in range(0, num_inputs):
         tmp1 += [0]
     for j in range(0, num_outputs):
         tmp2 += [default]
     output += [[tmp1, tmp2]]
 
+    # Populate rest of the addresses with 'default'
     for i in range(1, 2**num_inputs):
         tmp1 = []
         for j in range(0, num_inputs):
@@ -37,6 +42,7 @@ def fill(table, default):
             tmp2 += [default]
         output += [[tmp1, tmp2]]
 
+    # Find and replace existing table values
     swc = 0
     for line in table:
         if(swc == 1):
@@ -48,13 +54,14 @@ def fill(table, default):
 
     return output
 
-
+# Map the Karnaugh
 def map(table):
     inputs_label = table[0][0]
     outputs_label = table[0][1]
     num_inputs = len(inputs_label)
     num_outputs = len(outputs_label)
 
+    # Reformat table into individual maps for each outputs
     maps = []
     for outputs in range(0, num_outputs):
         tmp = []
@@ -62,12 +69,11 @@ def map(table):
         for line in table:
             if(label == 0):
                 tmp += [[line[0], line[1][outputs]]]
-
             label = 0
         maps += [tmp]
 
+    # Extract elemets with output = 1 or X
     selected_maps = []
-
     for map in maps:
         tmp = []
         for line in map:
@@ -75,6 +81,7 @@ def map(table):
                 tmp += [line]
         selected_maps += [tmp]
 
+    # Remove trivial outputs
     old_selected_maps = []
     old_outputs_label = []
     cnt = 0
@@ -88,11 +95,12 @@ def map(table):
     selected_maps = old_selected_maps
     outputs_label = old_outputs_label
 
+    # Start of Karnaugh recursion
     old_selected_maps= []
     while(old_selected_maps != selected_maps):
 
+        # Identify and merge adjacent cells using check_neighbor()
         old_selected_maps = selected_maps
-
         processed = []
         for map in selected_maps:
             num_entries = len(map)
@@ -105,7 +113,6 @@ def map(table):
                 for index1 in range(0, num_entries):
                     for index2 in range(index1 + 1, num_entries):
                         neighbor = check_neighbor(map[index1][0], map[index2][0])
-                        
                         if(neighbor[0][0] < 2):
                             if((map[index1][1] == 'X') and (map[index2][1] == 'X')):
                                 tmp += [[neighbor[1], 'X']]
@@ -113,18 +120,16 @@ def map(table):
                                 tmp += [[neighbor[1], '1']]
                             markoff[index1] += 1
                             markoff[index2] += 1
-
                     if(markoff[index1] == 0):
                         tmp += [map[index1]]
             if(tmp != []):
                 processed += [tmp]
             else:
                 processed = selected_maps
-
         selected_maps = processed  
 
+        # Remove duplicates
         post_selected_maps = []
-
         for map in selected_maps:
             post_map = []
             num_entries = len(map)
@@ -138,7 +143,8 @@ def map(table):
             post_selected_maps += [post_map]
 
         selected_maps = post_selected_maps 
-        
+    
+    # Add labels
     mapped = []
     cnt = 0
     for map in selected_maps:
@@ -152,6 +158,7 @@ def map(table):
 
     return mapped
 
+# Show boolean equations of mapped outputs
 def show(mapped):
     for map in mapped:
         label = 1

@@ -1,4 +1,4 @@
-
+# Parse states into table format for Karnaugh mapper
 def parse(states):
     num_states = len(states)
     num_inputs = len(states[0])
@@ -6,12 +6,14 @@ def parse(states):
     num_inputs_label = 1
     output = []
 
+    # Determine number of input bits required
     while(2**(num_states_label) < num_states):
         num_states_label += 1
 
     while(2**(num_inputs_label) < num_inputs):
         num_inputs_label += 1
 
+    # Label input bits
     inputs_label = []
     for i in range(0, num_states_label):
         inputs_label += [chr(65 + i)]
@@ -20,6 +22,7 @@ def parse(states):
         s = chr(73) + chr(49+i)
         inputs_label += [s]
 
+    # Label output bits
     outputs_label = []
     for i in range(0, num_states_label):
         s = chr(79) + chr(49+i)
@@ -27,6 +30,7 @@ def parse(states):
 
     output += [[inputs_label, outputs_label]]
 
+    # Parse states into binary table
     for i in range(0, 2**(num_states_label)):
         input_bin1 = []
         old_value = 0
@@ -35,7 +39,6 @@ def parse(states):
             value = int((i-old_value)/(2**(num_states_label-x-1)))
             input_bin1 += [value]
             old_value += value*(2**(num_states_label-x-1))
-
 
         for j in range(0, 2**(num_inputs_label)):
             old_value = 0
@@ -60,6 +63,7 @@ def parse(states):
 
     return output
 
+# Print parsed states into human-readable table
 def show(parsed):
     cnt1 = 0
     for line in parsed:
