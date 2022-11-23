@@ -82,7 +82,7 @@ def present(parsed):
 
         if(cnt1 == 0):
             print("")
-            for i in range(0, 22):
+            for i in range(0, 7*len(parsed[0][0])):
                 print("-", end = '')
         cnt1 = 1
 

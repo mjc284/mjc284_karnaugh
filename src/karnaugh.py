@@ -39,17 +39,17 @@ def map(table):
                 tmp += [line]
         selected_maps += [tmp]
 
-    old_processed = [1]
-    processed = []
-    while(old_processed != processed):
-        pre_selected_maps = []
-        old_processed = processed
+    old_selected_maps= []
+    while(old_selected_maps != selected_maps):
+
+        old_selected_maps = selected_maps
+
         processed = []
         for map in selected_maps:
             num_entries = len(map)
             tmp = []
 
-            if(num_entries > 2):
+            if(num_entries >= 2):
                 markoff = []
                 for j in range(0, num_entries):
                     markoff += [0]
@@ -71,10 +71,25 @@ def map(table):
                 processed += [tmp]
 
         selected_maps = []
-        selected_maps += processed        
+        selected_maps += processed   
 
-    print(selected_maps)
-    print("")
+        post_selected_maps = []
+
+        for map in selected_maps:
+            post_map = []
+            num_entries = len(map)
+            for index1 in range(0, num_entries):
+                same = 0
+                for index2 in range(index1 + 1, num_entries):
+                    if(map[index1] == map[index2]):
+                        same = 1
+                if(same != 1):
+                    post_map += [map[index1]]
+            post_selected_maps += [post_map]
+
+        selected_maps = []
+        selected_maps += post_selected_maps 
+        
     mapped = []
     cnt = 0
     for map in selected_maps:
@@ -85,8 +100,6 @@ def map(table):
                 tmp += [line]
         cnt += 1
         mapped += [tmp]
-
-    print(mapped)
 
     return mapped
 
