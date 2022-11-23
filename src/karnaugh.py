@@ -13,6 +13,43 @@ def check_neighbor(cmp1, cmp2):
             output += [cmp1[inputs]]
     return [[cnt], output]
 
+def fill(table, default):
+    num_inputs = len(table[0][0])
+    num_outputs = len(table[0][1])
+
+    output = []
+    output += [table[0]]
+
+    tmp1 = []
+    tmp2 = []
+    for i in range(0, num_inputs):
+        tmp1 += [0]
+    for j in range(0, num_outputs):
+        tmp2 += [default]
+    output += [[tmp1, tmp2]]
+
+    for i in range(1, 2**num_inputs):
+        tmp1 = []
+        for j in range(0, num_inputs):
+            tmp1.insert(0, int(((i & 2**j)) != 0))
+        tmp2 = []
+        for j in range(0, num_outputs):
+            tmp2 += [default]
+        output += [[tmp1, tmp2]]
+
+    swc = 0
+    for line in table:
+        if(swc == 1):
+            index = 0
+            for i in range(0, num_inputs):
+                index += line[0][i]*(2**(num_inputs - i - 1))
+            print(index)
+            output[int(index)+1] = line
+        swc = 1
+        
+    return output
+
+
 def map(table):
     inputs_label = table[0][0]
     outputs_label = table[0][1]
@@ -103,7 +140,7 @@ def map(table):
 
     return mapped
 
-def present(mapped):
+def show(mapped):
     for map in mapped:
         label = 1
         swc2 = 0

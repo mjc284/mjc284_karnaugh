@@ -1,9 +1,5 @@
-import numpy as np
 import states_parser as sp
 import karnaugh as kn
-
-states = np.array([[0, 1], [1, 2], [2, 0]])
-states = np.array([[1, 1, 1, 3], [2, 2, 2, 2], [4, 4, 4, 4], [4, 4, 4, 4], [0, 0, 0, 0]])
 
 parsed = [[['A', 'B', 'C', 'D'], ['O']],
 [[0, 0, 0, 0], [0]],
@@ -23,10 +19,13 @@ parsed = [[['A', 'B', 'C', 'D'], ['O']],
 [[1, 1, 1, 0], [0]],
 [[1, 1, 1, 1], [1]]]
 
-parsed = sp.parse(states)
-sp.present(parsed)
+parsed = [[['A', 'B', 'C', 'I1', 'I2'], ['O1', 'O2', 'O3']], [[1, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 1.0]], [[0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 1.0]]]
 
-print("")
+
+states = [[0, 1], [1, 2], [2, 0]]
+states = [[1, 1, 1, 3], [2, 2, 2, 2], [4, 4, 4, 4], [4, 4, 4, 4], [0, 0, 0, 0]]
+
+parsed = sp.parse(states)
 
 processed = kn.map(parsed)
-kn.present(processed)
+kn.show(processed)

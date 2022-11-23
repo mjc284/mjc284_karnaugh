@@ -1,8 +1,7 @@
-import numpy as np
 
 def parse(states):
-    num_states = np.shape(states)[0]
-    num_inputs = np.shape(states)[1]
+    num_states = len(states)
+    num_inputs = len(states[0])
     num_states_label = 1
     num_inputs_label = 1
     output = []
@@ -33,7 +32,7 @@ def parse(states):
         old_value = 0
 
         for x in range(0, num_states_label):
-            value = np.floor((i-old_value)/(2**(num_states_label-x-1)))
+            value = int((i-old_value)/(2**(num_states_label-x-1)))
             input_bin1 += [value]
             old_value += value*(2**(num_states_label-x-1))
 
@@ -42,7 +41,7 @@ def parse(states):
             old_value = 0
             input_bin2 = []
             for x in range(0, num_inputs_label):
-                value = np.floor((j-old_value)/(2**(num_inputs_label-x-1)))
+                value = int((j-old_value)/(2**(num_inputs_label-x-1)))
                 input_bin2 += [value]
                 old_value += value*(2**(num_inputs_label-x-1))
 
@@ -50,7 +49,7 @@ def parse(states):
             output_bin = []
             for x in range(0, num_states_label):
                 if(i < num_states):
-                    value = np.floor((states[i][j]-old_value)/(2**(num_states_label-x-1)))
+                    value = int((states[i][j]-old_value)/(2**(num_states_label-x-1)))
                     output_bin += [value]
                     old_value += value*(2**(num_states_label-x-1))
                 else:
@@ -61,7 +60,7 @@ def parse(states):
 
     return output
 
-def present(parsed):
+def show(parsed):
     cnt1 = 0
     for line in parsed:
         cnt2 = 0
