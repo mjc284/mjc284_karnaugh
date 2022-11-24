@@ -204,8 +204,8 @@ Return: mapped solution array.
   
 </details>
 
-### fill(table)
-Function to fill a truth table with all possible values of the inputs.
+### fill(table, default_value)
+Function to fill a truth table with a default value for all other possible values of the inputs.
 Return: filled truth table.
 
 #### Example:
@@ -213,10 +213,76 @@ Return: filled truth table.
 <details>
   <summary>Expand</summary>
   
+  Input:
   ```
+  # Manually declare truth table:
   truth_table = [[['A', 'B', 'C', 'I1', 'I2'], ['O1', 'O2', 'O3']], 
-                [[1, 0, 0, 0, 0], [0, 0, 1]], 
-                [[0, 0, 0, 0, 0], [0, 0, 1]]]
+                 [[  1,   0,   0,    0,    0], [   0,    0,    1]], 
+                 [[  0,   0,   0,    0,    0], [   0,    0,    1]]]
+  
+  # Print truth table in human-readable table format:
+  print("Arbitrary Truth Table:\n")
+  sp.show(truth_table)
+  print("\n")
+
+  # Populate truth table with default 0, 1, or 'X' for Karnaugh mapper.
+  # kn.fill(input_truth_table, default_value)
+  truth_table = kn.fill(truth_table, 0)
+
+  # Print populated truth table in human-readable table format:
+  print("Filled states:\n")
+  sp.show(truth_table)
+  print("\n")
+  ```
+  
+  Console output:
+  
+  ```
+  Arbitrary Truth Table:
+
+| A | B | C | I1| I2|| O1| O2| O3|
+----------------------------------
+| 1 | 0 | 0 | 0 | 0 || 0 | 0 | 1 |
+| 0 | 0 | 0 | 0 | 0 || 0 | 0 | 1 |
+
+
+Filled states:
+
+| A | B | C | I1| I2|| O1| O2| O3|
+----------------------------------
+| 0 | 0 | 0 | 0 | 0 || 0 | 0 | 1 |
+| 0 | 0 | 0 | 0 | 1 || 0 | 0 | 0 |
+| 0 | 0 | 0 | 1 | 0 || 0 | 0 | 0 |
+| 0 | 0 | 0 | 1 | 1 || 0 | 0 | 0 |
+| 0 | 0 | 1 | 0 | 0 || 0 | 0 | 0 |
+| 0 | 0 | 1 | 0 | 1 || 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 | 0 || 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 | 1 || 0 | 0 | 0 |
+| 0 | 1 | 0 | 0 | 0 || 0 | 0 | 0 |
+| 0 | 1 | 0 | 0 | 1 || 0 | 0 | 0 |
+| 0 | 1 | 0 | 1 | 0 || 0 | 0 | 0 |
+| 0 | 1 | 0 | 1 | 1 || 0 | 0 | 0 |
+| 0 | 1 | 1 | 0 | 0 || 0 | 0 | 0 |
+| 0 | 1 | 1 | 0 | 1 || 0 | 0 | 0 |
+| 0 | 1 | 1 | 1 | 0 || 0 | 0 | 0 |
+| 0 | 1 | 1 | 1 | 1 || 0 | 0 | 0 |
+| 1 | 0 | 0 | 0 | 0 || 0 | 0 | 1 |
+| 1 | 0 | 0 | 0 | 1 || 0 | 0 | 0 |
+| 1 | 0 | 0 | 1 | 0 || 0 | 0 | 0 |
+| 1 | 0 | 0 | 1 | 1 || 0 | 0 | 0 |
+| 1 | 0 | 1 | 0 | 0 || 0 | 0 | 0 |
+| 1 | 0 | 1 | 0 | 1 || 0 | 0 | 0 |
+| 1 | 0 | 1 | 1 | 0 || 0 | 0 | 0 |
+| 1 | 0 | 1 | 1 | 1 || 0 | 0 | 0 |
+| 1 | 1 | 0 | 0 | 0 || 0 | 0 | 0 |
+| 1 | 1 | 0 | 0 | 1 || 0 | 0 | 0 |
+| 1 | 1 | 0 | 1 | 0 || 0 | 0 | 0 |
+| 1 | 1 | 0 | 1 | 1 || 0 | 0 | 0 |
+| 1 | 1 | 1 | 0 | 0 || 0 | 0 | 0 |
+| 1 | 1 | 1 | 0 | 1 || 0 | 0 | 0 |
+| 1 | 1 | 1 | 1 | 0 || 0 | 0 | 0 |
+| 1 | 1 | 1 | 1 | 1 || 0 | 0 | 0 |
+
   ```
   
 </details>
