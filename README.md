@@ -125,7 +125,7 @@ Parsed JK flip-flop states:
 </details>
 
 ## karnaugh.py
-Module for karnaugh mapping and outputting boolean equations for a given truth table.
+Module for karnaugh mapping and print boolean equations for a given truth table in a console.
 
 ### map(table)
 Function to solve the karnaugh map of a given truth table. The truth table has to be a filled table (See fill(table)).
