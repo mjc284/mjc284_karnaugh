@@ -282,7 +282,14 @@ Filled states:
 | 1 | 1 | 1 | 0 | 1 || 0 | 0 | 0 |
 | 1 | 1 | 1 | 1 | 0 || 0 | 0 | 0 |
 | 1 | 1 | 1 | 1 | 1 || 0 | 0 | 0 |
-
   ```
-  
 </details>
+
+### show(solution_array)
+Function to print the solution array into HDL-compatible boolean equations.
+Return: boolean expression.
+
+### output(solution_array)
+Function to generate a verilog module with the given finite state machine solution array. 
+
+## Example Finite State Machine Verilog Module Generation
