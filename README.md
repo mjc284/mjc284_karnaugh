@@ -15,6 +15,10 @@ Function to modify a parsed truth table to fit a given flip-flop type. The flipf
 Print the parsed truth table into a human-readable table in the console.
 
 ### Example
+
+<details>
+  <summary>Expand</summary>
+  
 Sample state diagram:
 ![State_Diagram](/photos/state_diagram.png "State_Diagram")
 
@@ -129,4 +133,10 @@ Kb = 1
 Jc = !A&!B
 Kc = 1
 ```
+</details>
 
+## karnaugh.py
+Module for karnaugh mapping and outputting boolean equations for a given truth table.
+
+### parse(states)
+Function to parse states into table format for Karnaugh mapper to process. The "states" must be an array in the form of [[state 0], [state 1], ...] where each [state n] = [(next state when I0 = 0, I1 = 0, ... In = 0), (next state when I0 = 0, I1 = 0, ..., In = 1), ...].
