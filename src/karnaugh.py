@@ -187,6 +187,49 @@ def show(mapped):
             label = 0
         print("")
         
+# Output verilog file with finite state machine
+def output(mapped, file_path, module_name):
+    file = open(file_path, "w")
+    file.write("module %s(\n" % module_name)
+    file.write("\t input clk,\n")
+    file.write("\t input [%d:0] in,\n" % (len(mapped[0][0][0])-len(mapped)-1))
+    file.write("\t output [%d:0] state\n" % (len(mapped)-1))
+    file.write("\t);\n\n")
+
+    file.write("\treg [%d:0] reg_state = %d'b0;\n" % ((len(mapped)-1), (len(mapped))))
+    file.write("\talways @(posedge clk) begin\n")
+
+    cnt = 0
+    for map in mapped:
+        label = 1
+        swc2 = 0
+        file.write("\t\treg_state[%d]" % cnt)
+        file.write(" <= ")
+        for line in map:
+            if(swc2 == 1):
+                    file.write(" | ")
+            if(label == 0):
+                swc1 = 0
+                num_item = len(line[0])
+                for index in range(0, num_item):
+                    if(line[0][index] == 1):
+                        if(swc1 == 1):
+                            file.write("&")
+                        file.write("reg_state[%d]" % index)
+                        swc1 = 1
+                    elif(line[0][index] == 0):
+                        if(swc1 == 1):
+                            file.write("&")
+                        file.write("!")
+                        file.write("reg_state[%d]" % index)
+                        swc1 = 1
+                swc2 = 1
+            label = 0
+        file.write(";\n")
+        cnt += 1
+    file.write("\tend\n")
+    file.write("endmodule")
+
 
 
 

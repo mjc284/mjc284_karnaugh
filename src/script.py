@@ -22,9 +22,14 @@ processed = kn.map(parsed)
 # Print mapped Karnaugh into HDL-compatible boolean equations:
 print("Output Equations:\n")
 kn.show(processed)
+print(processed)
+
+# Output a verilog file with the implemented finite state machine:
+# kn.output(mapped_array, output_file_path, verilog_module_name)
+kn.output(processed, "FSM.v", "FSM")
+
+
 print("\n\n\n\n")
-
-
 
 
 print("Method 2: Solve Karnaugh equations based on arbitrary truth table.")
