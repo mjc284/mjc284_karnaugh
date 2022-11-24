@@ -171,5 +171,28 @@ Return: mapped solution array.
 | 1 | 1 | 1 | 0 || 0 |
 | 1 | 1 | 1 | 1 || 1 |
 ```
+1. Extract 1s or Xs:
   
+  ```
+  [[[0, 1, 0, 1], [1]], [[0, 1, 1, 1], [1]], [[1, 1, 0, 1], [1]], [[1, 1, 1, 1], [1]]]
+  ```
+
+2. Identify and merge neighbors:
+  
+  ```
+  [[[0, 1, 'X', 1], [1]], [['X', 1, 0, 1], [1]], [['X', 1, 1, 1], [1]], [[1, 1, 'X', 1], [1]]]
+  ```
+  
+3. Remove duplicates: (none)
+  
+4. Identify and merge neighbors:
+  
+  ```
+  [[['X, 1, 'X', 1], [1]], [['X', 1, 'X', 1], [1]]]
+  ```
+5. Remove duplicates:
+  
+  ```
+  [[['X, 1, 'X', 1], [1]]
+  ```
 </details>
