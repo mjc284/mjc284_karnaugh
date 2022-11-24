@@ -15,7 +15,9 @@ Function to modify a parsed truth table to fit a given flip-flop type. The flipf
 Print the parsed truth table into a human-readable table in the console.
 
 ### Example
+Sample state diagram:
 ![State_Diagram](/photos/state_diagram.png "State_Diagram")
+
 Input:
 ```
 # Declare states:
