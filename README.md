@@ -145,7 +145,11 @@ Function to solve the karnaugh map of a given truth table. The truth table has t
 Return: mapped solution array.
 
 #### Mapping algorithm:
-The function solves the karnaugh map with the following recursion: identifying neighbors and merging, removing duplicates. For example, for the given truth table:
+<details>
+  <summary>Expand</summary>
+  
+  The function solves the karnaugh map with the following recursion: identifying neighbors and merging, removing duplicates. 
+  For example, for the given truth table:
 
 ```
 | A | B | C | D || O |
@@ -166,5 +170,6 @@ The function solves the karnaugh map with the following recursion: identifying n
 | 1 | 1 | 0 | 1 || 1 |
 | 1 | 1 | 1 | 0 || 0 |
 | 1 | 1 | 1 | 1 || 1 |
-
 ```
+  
+</details>
