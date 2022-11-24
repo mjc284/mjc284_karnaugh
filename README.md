@@ -212,6 +212,7 @@ Return: filled truth table.
 
 <details>
   <summary>Expand</summary>
+  
   ```
   truth_table = [[['A', 'B', 'C', 'I1', 'I2'], ['O1', 'O2', 'O3']], 
                 [[1, 0, 0, 0, 0], [0, 0, 1]], 
