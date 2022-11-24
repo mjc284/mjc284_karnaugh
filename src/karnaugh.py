@@ -14,6 +14,32 @@ def check_neighbor(cmp1, cmp2):
             output += [cmp1[inputs]]
     return [[cnt], output]
 
+def comp_map(map1, map2):
+    equal = 1
+    length1 = len(map1)
+    if(length1 != len(map2)):
+        return 0
+    length2 = len(map1[0])
+    if(length2 != len(map2[0])):
+        return 0
+    length3 = len(map1[0][0])
+    if(length3 != len(map2[0][0])):
+        return 0
+    length4 = len(map1[0][0][0])
+    if(length4 != len(map2[0][0][0])):
+        return 0
+
+    for i in range(0, length1):
+        for j in range(0, length2):
+            for k in range(1, length3):
+                if(map1[i][j][k] != map2[i][j][k]):
+                    return 0
+            for l in range(0, length4):
+                if(map1[i][j][0][l] != map2[i][j][0][l]):
+                    return 0
+    return 1
+    
+
 # Populate truth table with default values
 def fill(table, default):
     num_inputs = len(table[0][0])
@@ -60,7 +86,7 @@ def map(table):
     outputs_label = table[0][1]
     num_inputs = len(inputs_label)
     num_outputs = len(outputs_label)
-
+ 
     # Reformat table into individual maps for each outputs
     maps = []
     for outputs in range(0, num_outputs):
@@ -105,7 +131,6 @@ def map(table):
         for map in selected_maps:
             num_entries = len(map)
             tmp = []
-
             if(num_entries >= 2):
                 markoff = []
                 for j in range(0, num_entries):
@@ -125,7 +150,7 @@ def map(table):
             if(tmp != []):
                 processed += [tmp]
             else:
-                processed = selected_maps
+                processed += [map]
         selected_maps = processed  
 
         # Remove duplicates
@@ -183,6 +208,8 @@ def show(mapped):
                         print("!", end = '')
                         print(map[0][0][index], end = '')
                         swc1 = 1
+                if(swc1 == 0):
+                    print(map[1][1], end = '')
                 swc2 = 1
             label = 0
         print("")
@@ -223,6 +250,8 @@ def output(mapped, file_path, module_name):
                         file.write("!")
                         file.write("reg_state[%d]" % index)
                         swc1 = 1
+                if(swc1 == 0):
+                    file.write(map[1][1])
                 swc2 = 1
             label = 0
         file.write(";\n")

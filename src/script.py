@@ -22,7 +22,6 @@ processed = kn.map(parsed)
 # Print mapped Karnaugh into HDL-compatible boolean equations:
 print("Output Equations:\n")
 kn.show(processed)
-print(processed)
 
 # Output a verilog file with the implemented finite state machine:
 # kn.output(mapped_array, output_file_path, verilog_module_name)
@@ -60,4 +59,27 @@ print ("")
 # Print mapped Karnaugh into HDL-compatible boolean equations:
 print("Output Equations:\n")
 kn.show(processed)
-print("\n\n")
+
+
+print("\n\n\n\n")
+
+
+print("Method 3: Solve Karnaugh equations based on finite state machine and choice of flip flop.")
+
+states = [[1, 1, 1, 3], [2, 2, 2, 2], [4, 4, 4, 4], [4, 4, 4, 4], [0, 0, 0, 0]]
+parsed = sp.parse(states)
+
+print("Parsed states:\n")
+sp.show(parsed)
+print("\n")
+
+# Parse states into flip-flop table format:
+# sp.flipflop(parsed_table, flipflop_type) where flipflop_type = "JK"/"SR"/"D"/"T"
+parsed = sp.flipflop(parsed, "JK")
+
+print("Parsed JK flip-flop states:\n")
+sp.show(parsed)
+print("\n")
+
+processed = kn.map(parsed)
+kn.show(processed)
