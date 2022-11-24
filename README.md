@@ -195,4 +195,11 @@ Return: mapped solution array.
   ```
   [[['X, 1, 'X', 1], [1]]
   ```
+  
+6. Final solution:
+  
+  ```
+  O = B & C
+  ```
+  
 </details>
