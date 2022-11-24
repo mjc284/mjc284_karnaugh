@@ -2,7 +2,7 @@ import states_parser as sp
 import karnaugh as kn
 
 
-print("Method 1: Solve Karnaugh equations based on finite state machine.\n")
+print("Method 1: Solve Karnaugh equations based on finite state machine and generate verilog module file.\n")
 
 # Declare states with the format: [[state 0], [state 1], ...]
 # Each [state n] = [(next state when I0 = 0, I1 = 0, ... In = 0), (next state when I0 = 0, I1 = 0, ..., In = 1), ...]
@@ -22,16 +22,18 @@ processed = kn.map(parsed)
 # Print mapped Karnaugh into HDL-compatible boolean equations:
 print("Output Equations:\n")
 kn.show(processed)
+print("\n")
 
 # Output a verilog file with the implemented finite state machine:
 # kn.output(mapped_array, output_file_path, verilog_module_name)
 kn.output(processed, "FSM.v", "FSM")
+print("Verilog output generated. Check: FSM.v")
 
 
 print("\n\n\n\n")
 
 
-print("Method 2: Solve Karnaugh equations based on arbitrary truth table.")
+print("Method 2: Solve Karnaugh equations based on arbitrary truth table.\n")
 
 # Manually declare truth table:
 truth_table = [[['A', 'B', 'C', 'I1', 'I2'], ['O1', 'O2', 'O3']], 
@@ -64,11 +66,15 @@ kn.show(processed)
 print("\n\n\n\n")
 
 
-print("Method 3: Solve Karnaugh equations based on finite state machine and choice of flip flop.")
+print("Method 3: Solve Karnaugh equations based on finite state machine and choice of flip flop.\n")
 
+# Declare states:
 states = [[1, 1, 1, 3], [2, 2, 2, 2], [4, 4, 4, 4], [4, 4, 4, 4], [0, 0, 0, 0]]
+
+# Parse states into table format:
 parsed = sp.parse(states)
 
+# Print parsed states into human-readable table format:
 print("Parsed states:\n")
 sp.show(parsed)
 print("\n")
@@ -77,9 +83,15 @@ print("\n")
 # sp.flipflop(parsed_table, flipflop_type) where flipflop_type = "JK"/"SR"/"D"/"T"
 parsed = sp.flipflop(parsed, "JK")
 
+# Print parsed flip-flop states into human-readable table format:
 print("Parsed JK flip-flop states:\n")
 sp.show(parsed)
 print("\n")
 
+# Function to map the Karnaugh:
 processed = kn.map(parsed)
+print ("")
+
+# Print mapped Karnaugh into HDL-compatible boolean equations:
+print("Output Equations:\n")
 kn.show(processed)
