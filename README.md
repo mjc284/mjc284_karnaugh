@@ -1,5 +1,6 @@
 # mjc284_karnaugh
 Python scripts to help construct karnaugh maps, boolean expressions, and finite state machines.
+
 Refer to script.py for examples of each functions.
 
 ## states_parser.py
